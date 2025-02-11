@@ -33,11 +33,15 @@ def null_data_report(null_data):
         return np.array([])
 
 # заполнение пустых ячеек  
-def null_data_fill(null_data):
+def null_data_fill(null_data, type_fill = 'mean'):
     try:
         if type(null_data[0]) == str:
             null_data.fillna(null_data[0], inplace=True)
-        else:null_data.fillna(null_data.mean(), inplace=True)
+        elif type_fill == 'mean':
+            null_data.fillna(null_data.mean(), inplace=True)
+        elif type_fill == 'median':
+            null_data.fillna(null_data.median, inplace=True)
+        else: null_data.fillna(null_data[0], inplace=True)
     except TypeError as e:
         print(f"Ошибка при расчетах: {e}")
         return np.array([])
