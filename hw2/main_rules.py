@@ -6,6 +6,12 @@ import numpy as np
 def null_data(null_data):
     try:
         return null_data.isnull().sum()
+    except TypeError as e:
+        print(f"Ошибка при расчетах: {e}")
+        return np.array([])
+    except ValueError as e:
+        print(f"Ошибка при расчетах: {e}")
+        return np.array([])
     except Exception as e:
         print(f"Ошибка при подсчете: {e}")
         return np.array([])
@@ -16,6 +22,12 @@ def null_data_report(null_data):
         #null_data.info()
         print("Пропущенные значения: ", data[null_data.isna()], sep='\n')
         print(f"Доля пропущенных значений в данных: {null_data.isnull().sum()/len(null_data)}")
+    except TypeError as e:
+        print(f"Ошибка при расчетах: {e}")
+        return np.array([])
+    except ValueError as e:
+        print(f"Ошибка при расчетах: {e}")
+        return np.array([])
     except Exception as e:
         print(f"Ошибка при расчетах: {e}")
         return np.array([])
@@ -26,12 +38,17 @@ def null_data_fill(null_data):
         if type(null_data[0]) == str:
             null_data.fillna(null_data[0], inplace=True)
         else:null_data.fillna(null_data.mean(), inplace=True)
-            
+    except TypeError as e:
+        print(f"Ошибка при расчетах: {e}")
+        return np.array([])
+    except ValueError as e:
+        print(f"Ошибка при расчетах: {e}")
+        return np.array([])            
     except Exception as e:
         print(f"Ошибка при заполнении: {e}")
         return np.array([])
- 
 
+    
  # Визуализация
 def scatter_data(plot_data, num_points=90):
     plt.figure(figsize=(10, 6))
